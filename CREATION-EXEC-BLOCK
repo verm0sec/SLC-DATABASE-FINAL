@@ -1,0 +1,33 @@
+CREATE DATABASE VehicleRegistry;
+USE VehicleRegistry;
+
+CREATE TABLE Provinces (
+  ProvinceID INT AUTO_INCREMENT PRIMARY KEY,
+  ProvinceName VARCHAR(100)
+);
+
+CREATE TABLE Owners (
+  OwnerID INT AUTO_INCREMENT PRIMARY KEY,
+  OwnerName VARCHAR(100),
+  PhoneNum VARCHAR(15)
+);
+
+CREATE TABLE Vehicles (
+  VehicleID INT AUTO_INCREMENT PRIMARY KEY,
+  LicensePlate VARCHAR(10),
+  Make VARCHAR(50),
+  Model VARCHAR(50),
+  Year INT,
+  ProvinceID INT,
+  OwnerID INT,
+  FOREIGN KEY (ProvinceID) REFERENCES Provinces(ProvinceID),
+  FOREIGN KEY (OwnerID) REFERENCES Owners(OwnerID)
+);
+
+CREATE TABLE TheftsReports (
+  ReportID INT AUTO_INCREMENT PRIMARY KEY,
+  VehicleID INT,
+  ReportDate DATE,
+  Status VARCHAR(20),
+  FOREIGN KEY (VehicleID) REFERENCES Vehicles(VehicleID)
+);
